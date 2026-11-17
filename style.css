@@ -1,97 +1,135 @@
-/* —— basic reset —— */
+/* Base styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
+:root {
+  color-scheme: light;
+  --ink: #171514;
+  --muted: #716963;
+  --paper: #f7f4f0;
+  --surface: #fff;
+  --line: #e4ddd6;
+  --rose: #965744;
+  --rose-dark: #75402f;
+}
+
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  min-height: 100vh;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
   display: flex;
   justify-content: center;
+  background: var(--paper);
 }
 
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  width: min(100% - 40px, 860px);
+  min-height: 100vh;
 }
 
-/* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding: 38px 0 12px;
+}
+
+.brand-logo {
+  display: block;
+  width: min(190px, 54vw);
+  height: auto;
+  margin: 0 auto 30px;
+}
+
+.site-eyebrow {
+  color: var(--rose);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
 }
 
 .site-title {
-  font-size: 22px;
+  margin-top: 12px;
+  font-size: clamp(26px, 4vw, 36px);
   font-weight: 500;
-  margin-bottom: 10px;
+  letter-spacing: -0.04em;
 }
 
-/* chat window */
+main {
+  flex: 1;
+}
+
 .chatbox {
-  margin: 40px 0;
+  margin: 30px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 12px 35px rgb(23 21 20 / 5%);
 }
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
-  padding: 20px;
-  font-size: 18px;
+  border: 1px solid var(--line);
+  padding: 22px;
+  color: var(--ink);
+  font-size: 16px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--surface);
   white-space: pre-line;
 }
 
-/* messages */
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
 }
 
 .msg.user {
-  color: #000;
+  color: var(--ink);
 }
 
 .msg.ai {
-  color: #666666;
+  color: var(--muted);
 }
 
-/* input row */
 .chat-form {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+  font-size: 16px;
 }
 
-.chat-form input:focus {
-  outline: 2px solid #000;
+.chat-form input:focus-visible {
+  outline: 2px solid var(--rose);
   outline-offset: 2px;
 }
 
 .chat-form button {
-  font-size: 18px;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px;
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  border-radius: 2px;
+  background: var(--ink);
+  color: #fff;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.2s ease;
 }
 
 .chat-form button .material-icons {
@@ -99,15 +137,14 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--rose-dark);
 }
 
-.chat-form button:focus {
-  outline: 2px solid #000;
+.chat-form button:focus-visible {
+  outline: 2px solid var(--rose);
   outline-offset: 2px;
 }
 
-/* visually hidden */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -120,12 +157,11 @@ body {
   border: 0;
 }
 
-/* footer */
 .site-footer {
-  margin: 60px 0 40px;
+  margin: 28px 0 32px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .site-footer nav {
@@ -134,10 +170,35 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--ink);
   text-decoration: none;
 }
 
-.site-footer a:hover {
-  color: #666666;
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--rose);
+}
+
+@media (max-width: 480px) {
+  .page-wrapper {
+    width: min(100% - 24px, 860px);
+  }
+
+  .site-header {
+    padding-top: 28px;
+  }
+
+  .brand-logo {
+    margin-bottom: 24px;
+  }
+
+  .chatbox {
+    padding: 10px;
+  }
+
+  .chat-window {
+    height: 50vh;
+    min-height: 260px;
+    padding: 16px;
+  }
 }
